@@ -4,6 +4,6 @@ Let's create a Christmas Tree 🎄 using CSS.
 
 ## Screenshots
 
-![App Screenshot](https://github.com/stunninghub/7_segment_display/blob/main/7_display.png)
+![App Screenshot](https://github.com/stunninghub/christmas_tree/blob/main/tree.png)
 
 
