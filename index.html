@@ -1,30 +1,126 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <style>
-      body{
-        justify-content: center;
-        align-items: center;
-        display:flex;
-        background: #eee;
-        min-height: 100vh;
-        font-family: arial;
-      }
-      .tree{
-        width:200px;
-        height:300px;
-        background: limegreen;
-        
-      }
-    </style>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Tree</title>
 </head>
-
 <body>
-  <div class="tree"></div>
-</body>
+   <div class="tree" data-leaf-color="green" data-branch-color="brown"></div>
 
+   <script>
+      var tree = document.querySelector('.tree'),
+         leaf_one_container = document.createElement("div"),
+         leaf_two_container = document.createElement("div"),
+         leaf_three_container = document.createElement("div"),
+         leaf_one = document.createElement("div"),
+         leaf_two = document.createElement("div"),
+         leaf_three = document.createElement("div"),
+         leaf_color = tree.getAttribute('data-leaf-color'),
+         branch = document.createElement('div'),
+         branch_color = tree.getAttribute('data-branch-color'),
+         style = document.createElement('style'),
+         head = document.head || document.getElementsByTagName('head')[0],
+         sh_style = `
+         body{
+            justify-content:center;
+            align-items:center;
+            display:flex;
+            min-height:100vh;
+         }
+         .tree{
+            width:200px;
+            height:300px;
+            position:relative;
+         }
+         .tree:after{
+            content:'';
+            position:absolute;
+            width:0px;
+            height:0px;
+            top:-105px;
+            margin:auto;
+            left:0px;
+            right:0px;
+            border-top:60px solid transparent;
+            border-right:60px solid transparent;
+            border-left:60px solid transparent;
+            border-bottom:60px solid `+leaf_color+`;
+         }
+         .leaf_container{
+            perspective:35px;
+            width:100%;
+            height:50px;
+         }
+         .leaf{
+            width:100%;
+            height:100%;
+            background:`+leaf_color+`;
+            position:relative;
+            margin:auto;
+            transform:rotateX(25deg);
+            transform-style:preserve-3d;
+         }
+         .leaf:after{
+            content:'';
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:100%;
+            height:100%;
+            background:linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(0,0,0,0.2));
+         }
+         .leaf_one{
+            width:90px;
+         }
+         .leaf_two{
+            width:120px;
+         }
+         .leaf_three{
+            width:140px;
+         }
+         .branch{
+            width:40px;
+            height:50px;
+            background:`+branch_color+`;
+            margin:auto;
+            position:relative;
+            z-index:-1;
+         }
+         .branch:after{
+            content:'';
+            width:100%;
+            height:100%;
+            background:linear-gradient(to right, rgba(255,255,255,0.2), rgba(0,0,0,0.4));
+            position:absolute;
+            top:0px;
+            left:0px;
+         }
+         `;
+      
+      head.appendChild(style);
+      style.type = "text/css";
+      style.appendChild(document.createTextNode(sh_style));
+
+      leaf_one_container.className = "leaf_one_container leaf_container";
+      leaf_two_container.className = "leaf_two_container leaf_container";
+      leaf_three_container.className = "leaf_three_container leaf_container";
+
+      leaf_one.className = "leaf_one leaf";
+      leaf_two.className = "leaf_two leaf";
+      leaf_three.className = "leaf_three leaf";
+      branch.className = "branch";
+
+      tree.appendChild(leaf_one_container);
+      tree.appendChild(leaf_two_container);
+      tree.appendChild(leaf_three_container);
+
+      leaf_one_container.appendChild(leaf_one);
+      leaf_two_container.appendChild(leaf_two);
+      leaf_three_container.appendChild(leaf_three);
+
+      tree.appendChild(branch);
+   </script>
+</body>
 </html>
